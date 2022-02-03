@@ -13,7 +13,6 @@ import static java.util.Objects.requireNonNull;
 public class FileUtils {
 
     @SneakyThrows
-    @SuppressWarnings("unused")
     public static String fileToString(String fileName, Class<?> clazz) {
         InputStream inputStream = clazz.getResourceAsStream(fileName);
         return IOUtils.toString(requireNonNull(inputStream), UTF_8);
