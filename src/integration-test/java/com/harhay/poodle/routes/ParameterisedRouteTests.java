@@ -28,16 +28,15 @@ class ParameterisedRouteTests extends AbstractRouteTests {
      */
     @ParameterizedTest
     @CsvSource({
-        "GET, /api/patients/, GET, /patients, patient-service",
-        "GET, /api/patients/123, GET, /patients/123, patient-service",
+        "GET, /api/patients, GET, /patients,",
+        "GET, /api/patients/123, GET, /patients/123, foo.json",
     })
-    void shouldRouteAuthorisedUsersToSecuredUpstreamServices(
+    void shouldRouteUpstreamServices(
         String method, String uri, String upstreamMethod, String upstreamUri, String body) {
 
-        createUpstreamServiceStub(upstreamMethod, upstreamUri, body, true);
+        createUpstreamServiceStub(upstreamMethod, upstreamUri, body);
 
         webClient.method(HttpMethod.valueOf(method)).uri(uri)
-            .headers(headers())
             .exchange()
             .expectStatus().isOk();
     }

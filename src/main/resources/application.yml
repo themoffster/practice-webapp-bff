@@ -51,9 +51,9 @@ spring:
           order: 2
           predicates:
             - Method=GET
-            - Path=/api/patients
+            - Path=/api/patients/**
           filters:
-            - RewritePathAndResetContextPath=/api/patients, /patients
+            - RewritePathAndResetContextPath=/api/patients(?<segment>/?.*), /patients$\{segment}
         # ============================================================================================================ #
         - id: practice-webapp
           uri: ${services.practice-webapp.base-url}
