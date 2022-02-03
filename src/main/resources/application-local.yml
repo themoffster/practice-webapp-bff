@@ -9,9 +9,9 @@ server:
 
 services:
   patient-service:
-    base-url: http://localhost:8082
+    base-url: http://TODO
   practice-webapp:
-    base-url: http://localhost:8080
+    base-url: http://TODO
 
 spring:
   datasource:
@@ -21,6 +21,21 @@ spring:
   flyway:
     url: ${spring.datasource.url}
     baseline-on-migrate: true
-    enabled: true
     user: practice_webapp_bff_admin
     password: practice_webapp_bff_admin
+
+# Profile for doing local development on the practice webapp
+---
+spring.config.activate.on-profile: local-practice-webapp
+
+services:
+  practice-webapp:
+    base-url: http://localhost:8080
+
+# Profile for doing local development on the patient service
+---
+spring.config.activate.on-profile: local-patient-service
+
+services:
+  patient-service:
+    base-url: http://localhost:8082

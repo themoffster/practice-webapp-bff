@@ -4,13 +4,6 @@ info:
     title: Practice Webapp BFF
     description: BFF for the Practice Webapp.
 
-#management:
-#  endpoint:
-#    health:
-#      group:
-#        readiness:
-#          include: db
-
 server:
   error:
     include-message: always
@@ -23,11 +16,9 @@ server:
 
 services:
   patient-service:
-    base-url: TODO
-    connect-timeout: ${timeouts.default.connect-timeout}
-    read-timeout: ${timeouts.default.read-timeout}
+    base-url: http://TODO
   practice-webapp:
-    base-url: http://localhost:8080
+    base-url: http://TODO
 
 spring:
   application:
@@ -78,6 +69,7 @@ spring:
       connection-test-query: select 1
       maximum-pool-size: 10
       minimum-idle: 1
+    url: jdbc:postgresql://TODO
   flyway:
     baseline-on-migrate: false
     enabled: true
@@ -94,8 +86,3 @@ spring:
     web-application-type: reactive
   websession:
     timeout: 2h
-
-timeouts:
-  default:
-    connect-timeout: 1s
-    read-timeout: 1m
