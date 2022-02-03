@@ -10,6 +10,8 @@ server:
 services:
   patient-service:
     base-url: http://localhost:8082
+  practice-webapp:
+    base-url: http://localhost:8080
 
 spring:
   datasource:
