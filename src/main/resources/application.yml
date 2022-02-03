@@ -47,7 +47,6 @@ spring:
               - BAD_GATEWAY # (502)
               - SERVICE_UNAVAILABLE # (503)
         - name: SaveSession
-        - name: SetResponseHeader
           args:
             name: X-Frame-Options
             value: SAMEORIGIN
@@ -71,8 +70,6 @@ spring:
           predicates:
             - Method=GET
             - Path=/**
-          filters:
-            - RewritePathAndResetContextPath=(?<segment>/?.*), $\{segment}
   codec:
     max-in-memory-size: -1
   datasource:
