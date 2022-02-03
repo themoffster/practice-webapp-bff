@@ -1,0 +1,12 @@
+# This file is managed by the jenkins-project-standardisation-builds project. Do not edit.
+build/
+build-vscode/
+.classpath
+.gradle/
+.idea/
+*.iml
+*.log
+out/
+.project
+screenshots/
+.settings/

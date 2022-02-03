@@ -1,0 +1,24 @@
+---
+logging:
+  level:
+    org:
+      springframework: DEBUG
+
+server:
+  port: 8081
+
+services:
+  patient-service:
+    base-url: http://localhost:8082
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/practice
+    username: practice_webapp_bff_rw
+    password: practice_webapp_bff_rw
+  flyway:
+    url: ${spring.datasource.url}
+    baseline-on-migrate: true
+    enabled: true
+    user: practice_webapp_bff_admin
+    password: practice_webapp_bff_admin

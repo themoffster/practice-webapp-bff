@@ -1,0 +1,4 @@
+---
+services:
+  patient-service:
+    base-url: https://patient-service

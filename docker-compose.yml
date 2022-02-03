@@ -1,0 +1,11 @@
+version: '3'
+
+services:
+  practice-webapp-bff:
+    container_name: patient-service
+      image: openjdk:11
+      network_mode: host
+      ports:
+        - 8081:8081
+      volumes:
+        - ./build/libs:/tmp/src

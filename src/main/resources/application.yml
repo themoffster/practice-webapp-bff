@@ -1,0 +1,92 @@
+---
+info:
+  app:
+    title: Practice Webapp BFF
+    description: BFF for the Practice Webapp.
+
+#management:
+#  endpoint:
+#    health:
+#      group:
+#        readiness:
+#          include: db
+
+server:
+  error:
+    include-message: always
+  forward-headers-strategy: framework
+  reactive:
+    session:
+      cookie:
+        name: JSESSIONID_PRACTICE
+        path: /
+
+services:
+  patient-service:
+    connect-timeout: ${timeouts.default.connect-timeout}
+    read-timeout: ${timeouts.default.read-timeout}
+
+spring:
+  application:
+    name: practice-webapp-bff
+  cloud:
+    gateway:
+      default-filters:
+        - name: Retry
+          args:
+            methods:
+              - GET
+              - HEAD
+              - OPTIONS
+            retries: 2
+            series: [ ]
+            statuses:
+              - BAD_GATEWAY # (502)
+              - SERVICE_UNAVAILABLE # (503)
+        - name: SaveSession
+        - name: SetResponseHeader
+          args:
+            name: X-Frame-Options
+            value: SAMEORIGIN
+      httpclient:
+        connect-timeout: 5000
+        response-timeout: 5m
+      routes:
+        # ============================================================================================================ #
+        - id: patient-service
+          uri: ${services.patient-service.base-url}
+          order: 2
+          predicates:
+            - Method=GET
+            - Path=/api/patients
+          filters:
+            - RewritePathAndResetContextPath=/api/patients, /patients
+  codec:
+    max-in-memory-size: -1
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      connection-test-query: select 1
+      maximum-pool-size: 10
+      minimum-idle: 1
+  flyway:
+    baseline-on-migrate: false
+    enabled: true
+  jackson:
+    default-property-inclusion: non_null
+  jpa:
+    database: postgresql
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate:
+        jdbc.lob.non_contextual_creation: true
+  main:
+    web-application-type: reactive
+  websession:
+    timeout: 2h
+
+timeouts:
+  default:
+    connect-timeout: 1s
+    read-timeout: 1m
