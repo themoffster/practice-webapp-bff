@@ -2,9 +2,7 @@
 
 set -a
 
-if [ ! -f build/libs/*.jar ]; then
-    ./gradlew clean build
-fi
+./gradlew clean build
 
 set +a
 
