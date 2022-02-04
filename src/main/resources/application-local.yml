@@ -1,4 +1,10 @@
 ---
+logging:
+  level:
+    org:
+      springframework:
+        security: DEBUG
+
 services:
   patient-service:
     base-url: http://TODO
