@@ -1,7 +1,4 @@
 ---
-server:
-  port: 8081
-
 services:
   patient-service:
     base-url: http://TODO
