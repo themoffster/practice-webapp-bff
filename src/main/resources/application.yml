@@ -53,7 +53,7 @@ spring:
             - Method=GET
             - Path=/api/patients/**
           filters:
-            - RewritePathAndResetContextPath=/api/patients(?<segment>/?.*), /patients$\{segment}
+            - RewritePath=/api/patients(?<segment>/?.*), /patients$\{segment}
         # ============================================================================================================ #
         - id: practice-webapp
           uri: ${services.practice-webapp.base-url}
